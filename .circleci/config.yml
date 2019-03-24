@@ -12,7 +12,8 @@ jobs:
       - image: circleci/node:10.15.0
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run: echo 'export VERSION=$(cat VERSION)' >> $BASH_ENV
       - run: src/publish.sh
 workflows:
