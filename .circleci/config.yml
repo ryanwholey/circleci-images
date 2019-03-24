@@ -21,13 +21,12 @@ workflows:
     jobs:
       - build
       - publish:
+          context: publish
           filters:
             branches:
               only:
                 - master
           requires:
             - build
-          context:
-            - publish
 
 
