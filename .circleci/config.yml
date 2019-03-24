@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.15.0
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: src/build.sh
+  publish:
+    docker:
+      - image: circleci/node:10.15.0
+    steps:
+      - checkout
+      - setup_remote_docker
+      - image: circleci/node:10.15.0
+      - run: 'export VERSION=$(cat VERSION) >> $BASH_ENV'
+      - run: src/publish.sh
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build
+      - publish:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - build
+
+
