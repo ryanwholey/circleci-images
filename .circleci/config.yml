@@ -13,7 +13,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - image: circleci/node:10.15.0
       - run: 'export VERSION=$(cat VERSION) >> $BASH_ENV'
       - run: src/publish.sh
 workflows:
