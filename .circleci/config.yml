@@ -13,7 +13,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: 'export VERSION=$(cat VERSION) >> $BASH_ENV'
+      - run: echo 'export VERSION=$(cat VERSION)' >> $BASH_ENV
       - run: src/publish.sh
 workflows:
   version: 2
